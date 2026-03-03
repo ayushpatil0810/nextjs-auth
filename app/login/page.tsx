@@ -83,8 +83,17 @@ export default function LoginPage() {
             />
           </div>
 
+          <div className="flex justify-end">
+            <Link
+              href="/forgotPassword"
+              className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              Forgot password?
+            </Link>
+          </div>
+
           <button
-            className="mt-2 w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-semibold transition-colors"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-semibold transition-colors"
             onClick={onLogin}
             disabled={buttonDisabled}
           >
