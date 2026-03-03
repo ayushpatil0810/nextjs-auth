@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 
 export default function LoginPage() {
@@ -20,9 +21,11 @@ export default function LoginPage() {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
       console.log("Login response:", response.data);
+      toast.success("Login successful!");
       router.push("/profile");
     } catch (error: any) {
       console.error("Login error:", error.message);
+      toast.error("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -38,6 +41,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#0a0a0f] px-4">
+      <Toaster />
       <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl">
         <h1 className="text-3xl font-bold text-white mb-1">
           {loading ? "Logging in..." : "Welcome back"}

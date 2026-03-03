@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 
 export default function SignupPage() {
@@ -57,6 +57,7 @@ export default function SignupPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#0a0a0f] px-4">
+      <Toaster />
       <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl">
         <h1 className="text-3xl font-bold text-white mb-1">
           {loading ? "Creating account..." : "Create account"}
