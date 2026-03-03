@@ -19,7 +19,6 @@ export default function SignupPage() {
 
   const onSignup = async () => {
     try {
-      
       setLoading(true);
 
       const response = await axios.post("/api/users/signup", user);
@@ -32,10 +31,11 @@ export default function SignupPage() {
           router.push("/login");
         }, 2000);
       } else {
-        toast.error(response.data.message || "Signup failed. Please try again.");
+        toast.error(
+          response.data.message || "Signup failed. Please try again.",
+        );
       }
-    }
-    catch (error: any) {
+    } catch (error: any) {
       toast.error("Signup failed. Please try again.");
       console.error("Signup error:", error);
     } finally {
@@ -56,48 +56,84 @@ export default function SignupPage() {
   }, [user]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">{loading ? "Signing up..." : "Signup"}</h1>
-      <hr />
-      <label htmlFor="username">Username</label>
-      <input
-        className="border border-gray-300 rounded-md p-2 mb-4"
-        type="text"
-        id="username"
-        value={user.username}
-        onChange={(e) => setUser({ ...user, username: e.target.value })}
-        placeholder="Enter your username"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0f] px-4">
+      <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl">
+        <h1 className="text-3xl font-bold text-white mb-1">
+          {loading ? "Creating account..." : "Create account"}
+        </h1>
+        <p className="text-gray-400 mb-8 text-sm">Sign up to get started</p>
 
-      <label htmlFor="email">Email</label>
-      <input
-        className="border border-gray-300 rounded-md p-2 mb-4"
-        type="email"
-        id="email"
-        value={user.email}
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-        placeholder="Enter your email"
-      />
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="username"
+              className="text-sm font-medium text-gray-300"
+            >
+              Username
+            </label>
+            <input
+              className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+              type="text"
+              id="username"
+              value={user.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              placeholder="Enter your username"
+            />
+          </div>
 
-      <label htmlFor="password">Password</label>
-      <input
-        className="border border-gray-300 rounded-md p-2 mb-4"
-        type="password"
-        id="password"
-        value={user.password}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-        placeholder="Enter your password"
-      />
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-gray-300"
+            >
+              Email
+            </label>
+            <input
+              className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+              type="email"
+              id="email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              placeholder="Enter your email"
+            />
+          </div>
 
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={onSignup}
-      >
-        {buttonDisabled ? "Please fill all fields" : "Signup"}
-      </button>
-      <Link href="/login" className="mt-4 text-blue-500 hover:underline">
-        Already have an account? Login
-      </Link>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-gray-300"
+            >
+              Password
+            </label>
+            <input
+              className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+              type="password"
+              id="password"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <button
+            className="mt-2 w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-semibold transition-colors"
+            onClick={onSignup}
+            disabled={buttonDisabled}
+          >
+            {buttonDisabled ? "Fill in all fields" : "Sign Up"}
+          </button>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-gray-500">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

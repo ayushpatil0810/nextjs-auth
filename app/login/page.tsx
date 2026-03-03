@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function LoginPage() {
-
   const router = useRouter();
 
   const [user, setUser] = React.useState({
@@ -15,7 +14,6 @@ export default function LoginPage() {
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-
 
   const onLogin = async () => {
     try {
@@ -39,39 +37,67 @@ export default function LoginPage() {
   }, [user]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">{loading ? "Logging in..." : "Login"}</h1>
-      <hr />
+    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0f] px-4">
+      <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl">
+        <h1 className="text-3xl font-bold text-white mb-1">
+          {loading ? "Logging in..." : "Welcome back"}
+        </h1>
+        <p className="text-gray-400 mb-8 text-sm">Sign in to your account</p>
 
-      <label htmlFor="email">Email</label>
-      <input
-        className="border border-gray-300 rounded-md p-2 mb-4"
-        type="email"
-        id="email"
-        value={user.email}
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-        placeholder="Enter your email"
-      />
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-gray-300"
+            >
+              Email
+            </label>
+            <input
+              className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+              type="email"
+              id="email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              placeholder="Enter your email"
+            />
+          </div>
 
-      <label htmlFor="password">Password</label>
-      <input
-        className="border border-gray-300 rounded-md p-2 mb-4"
-        type="password"
-        id="password"
-        value={user.password}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-        placeholder="Enter your password"
-      />
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-gray-300"
+            >
+              Password
+            </label>
+            <input
+              className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+              type="password"
+              id="password"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              placeholder="Enter your password"
+            />
+          </div>
 
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={onLogin}
-      >
-        {buttonDisabled ? "Please fill in all fields" : "Login"}
-      </button>
-      <Link href="/signup" className="mt-4 text-blue-500 hover:underline">
-        Don't have an account? Signup
-      </Link>
+          <button
+            className="mt-2 w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-semibold transition-colors"
+            onClick={onLogin}
+            disabled={buttonDisabled}
+          >
+            {buttonDisabled ? "Fill in all fields" : "Login"}
+          </button>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-gray-500">
+          Don&apos;t have an account?{" "}
+          <Link
+            href="/signup"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            Sign up
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

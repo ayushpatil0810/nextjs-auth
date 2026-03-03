@@ -2,11 +2,17 @@ export default async function UserProfile({ params }: any) {
   const { id } = await params;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
-      <hr />
-      <p>This is the profile page for user ID: </p>
-      <span className="font-bold bg-amber-600 rounded p-2">{id}</span>
+    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0f] px-4">
+      <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl text-center">
+        <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+          U
+        </div>
+        <h1 className="text-2xl font-bold text-white mb-4">Profile</h1>
+        <p className="text-gray-400 text-sm mb-3">User ID</p>
+        <span className="inline-block font-mono text-sm bg-gray-800 border border-gray-700 text-blue-400 rounded-lg px-4 py-2">
+          {id}
+        </span>
+      </div>
     </div>
   );
 }
