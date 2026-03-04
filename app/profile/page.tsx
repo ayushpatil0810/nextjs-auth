@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import React from "react";
 
+<<<<<<< HEAD
 interface Profile {
   _id: string;
   username: string;
@@ -13,6 +14,11 @@ interface Profile {
 export default function ProfilePage() {
   const router = useRouter();
   const [profile, setProfile] = React.useState<Profile | null>(null);
+=======
+export default function ProfilePage() {
+  const router = useRouter();
+  const [profile, setProfile] = React.useState(null);
+>>>>>>> acecdc07ac07f17ce2f93de85f4d9f74e0e14cb9
 
   const logout = async () => {
     try {
